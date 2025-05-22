@@ -1,175 +1,525 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>dwp AB | Strategic Advisory</title>
   <style>
-    body {
+    :root {
+      --primary: #1f3a93;
+      --primary-dark: #162e6e;
+      --primary-light: #4a6fdc;
+      --text: #111;
+      --text-medium: #444;
+      --text-light: #777;
+      --bg-light: #f9f9fb;
+      --white: #fff;
+      --border: #e1e1e1;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    
+    * {
       margin: 0;
-      font-family: "Helvetica Neue", sans-serif;
-      color: #111;
-      background-color: #fff;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text);
       line-height: 1.6;
+      background-color: var(--white);
     }
-    header {
-      padding: 2rem;
-      background-color: #f9f9fb;
+    
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      padding: 1rem 2rem;
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-logo {
+      height: 40px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+      padding: 8rem 2rem 4rem;
       text-align: center;
+      margin-bottom: 3rem;
     }
-    header img {
-      max-width: 160px;
+    
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-medium);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Services Section */
+    .services {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title h2 {
+      font-size: 2rem;
+      color: var(--primary);
       margin-bottom: 1rem;
     }
-    header h1 {
-      font-size: 2rem;
+    
+    .section-title p {
+      color: var(--text-medium);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .service-card {
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .service-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .service-content {
+      padding: 1.5rem;
+    }
+    
+    .service-content h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    
+    .service-content p {
+      color: var(--text-medium);
+      margin-bottom: 1.5rem;
+    }
+    
+    .service-features {
+      margin-bottom: 1.5rem;
+    }
+    
+    .service-features li {
+      list-style: none;
+      padding-left: 1.5rem;
+      position: relative;
       margin-bottom: 0.5rem;
     }
-    header p {
-      font-size: 1.2rem;
-      color: #555;
+    
+    .service-features li:before {
+      content: "•";
+      color: var(--primary-light);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
     }
-    section {
-      max-width: 960px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+    
+    .cta-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: background-color 0.3s;
     }
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 0.25rem;
+    
+    .cta-button:hover {
+      background-color: var(--primary-dark);
     }
-    ul {
-      padding-left: 1.2rem;
+    
+    /* About Section */
+    .about {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
-    .feature-image {
+    
+    .about-image {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .about-image img {
       width: 100%;
       height: auto;
-      margin: 1rem 0;
-      border-radius: 8px;
+      display: block;
     }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 600px;
-      margin-top: 1rem;
+    
+    .about-content h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
     }
-    input, textarea, button {
-      padding: 0.75rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    
+    .about-content p {
+      color: var(--text-medium);
+      margin-bottom: 1.5rem;
     }
-    button {
-      background-color: #1f3a93;
-      color: white;
-      border: none;
-      cursor: pointer;
+    
+    /* Contact Section */
+    .contact {
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
     }
-    button:hover {
-      background-color: #162e6e;
-    }
-    footer {
-      text-align: center;
+    
+    .contact-form {
+      background: var(--white);
       padding: 2rem;
-      background-color: #f1f1f1;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-medium);
+      font-weight: 500;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    
+    textarea.form-control {
+      min-height: 150px;
+    }
+    
+    .submit-btn {
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .submit-btn:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    .contact-info {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    
+    .contact-info a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: #2a2a2a;
+      color: var(--white);
+      padding: 3rem 0 0;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    
+    .footer-brand img {
+      height: 40px;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-brand p {
+      color: #ccc;
+    }
+    
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    
+    .footer-links h3 {
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .footer-links a {
+      display: block;
+      color: #ccc;
+      margin-bottom: 0.75rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--white);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+      border-top: 1px solid #444;
       font-size: 0.9rem;
-      color: #777;
+      color: #999;
     }
-
+    
     /* Responsive Design */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 1.5rem;
+    @media (min-width: 768px) {
+      .hero {
+        padding: 10rem 2rem 6rem;
       }
-      header p {
-        font-size: 1rem;
+      
+      .hero h1 {
+        font-size: 3rem;
       }
-      h2 {
-        font-size: 1.3rem;
+      
+      .about {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
       }
-      section {
-        padding: 0 1rem;
-      }
-      form {
-        width: 100%;
+      
+      .footer-container {
+        grid-template-columns: 1fr 2fr;
       }
     }
-
-    @media (max-width: 480px) {
-      header img {
-        max-width: 120px;
+    
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
       }
-      input, textarea, button {
-        font-size: 0.9rem;
-        padding: 0.6rem;
+      
+      .hero {
+        padding: 6rem 1rem 3rem;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="logga med CC.png" alt="dwp AB logo" />
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <img src="logga med CC.png" alt="dwp AB" class="nav-logo">
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero">
     <h1>Strategic Advice. Tangible Impact.</h1>
     <p>We support leaders and owners in navigating transactions, driving transformation, and unlocking the value of AI and data.</p>
-  </header>
-
-  <section>
-    <h2>Transactions</h2>
-    <img src="christian-wiediger-ssKEI4HRRtI-unsplash.jpg" class="feature-image" alt="Transactions context image">
-    <p>We guide business owners and management teams through mergers, acquisitions, divestments, and capital raising. With deep financial expertise and sharp execution, we ensure our clients achieve well-structured, successful outcomes — across sectors and borders.</p>
-    <ul>
-      <li>Sell-side and buy-side advisory</li>
-      <li>Financial due diligence</li>
-      <li>Capital structure optimization</li>
-    </ul>
   </section>
-
-  <section>
-    <h2>Transformation</h2>
-    <img src="alicja-ziajowska-AOjmfr3ofSY-unsplash.jpg" class="feature-image" alt="Transformation context image">
-    <p>We support organizations in navigating and executing critical transformations — from evolving business models to leading cultural shifts and unlocking new ways of working. Our work is grounded in practical experience and tailored to each client’s context.</p>
-    <ul>
-      <li>Executive coaching</li>
-      <li>Strategy refinement</li>
-      <li>Change management</li>
-      <li>Operating model redesign</li>
-    </ul>
+  
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <div class="section-title">
+      <h2>Our Services</h2>
+      <p>Comprehensive solutions tailored to your strategic needs</p>
+    </div>
+    
+    <div class="services-grid">
+      <!-- Transaction Service -->
+      <div class="service-card">
+        <img src="christian-wiediger-ssKEI4HRRtI-unsplash.jpg" alt="Transactions">
+        <div class="service-content">
+          <h3>Transactions</h3>
+          <p>We guide business owners and management teams through mergers, acquisitions, divestments, and capital raising.</p>
+          <ul class="service-features">
+            <li>Sell-side and buy-side advisory</li>
+            <li>Financial due diligence</li>
+            <li>Capital structure optimization</li>
+          </ul>
+          <a href="#contact" class="cta-button">Learn More</a>
+        </div>
+      </div>
+      
+      <!-- Transformation Service -->
+      <div class="service-card">
+        <img src="alicja-ziajowska-AOjmfr3ofSY-unsplash.jpg" alt="Transformation">
+        <div class="service-content">
+          <h3>Transformation</h3>
+          <p>We support organizations in navigating and executing critical transformations.</p>
+          <ul class="service-features">
+            <li>Executive coaching</li>
+            <li>Strategy refinement</li>
+            <li>Change management</li>
+            <li>Operating model redesign</li>
+          </ul>
+          <a href="#contact" class="cta-button">Learn More</a>
+        </div>
+      </div>
+      
+      <!-- AI & Data Service -->
+      <div class="service-card">
+        <img src="business-person-futuristic-business-environment.jpg" alt="AI & Data">
+        <div class="service-content">
+          <h3>AI & Data</h3>
+          <p>We bridge business and data to help leaders extract value and make better decisions.</p>
+          <ul class="service-features">
+            <li>Data strategy & governance</li>
+            <li>AI & data science advisory</li>
+            <li>Integrations</li>
+          </ul>
+          <a href="#contact" class="cta-button">Learn More</a>
+        </div>
+      </div>
+    </div>
   </section>
-
-  <section>
-    <h2>AI & Data</h2>
-    <img src="business-person-futuristic-business-environment.jpg" class="feature-image" alt="AI and data context image">
-    <p>We bridge business and data. From advanced analytics to AI-powered insights, we help leaders extract value from data and make better decisions. Our approach combines technical excellence with strategic understanding.</p>
-    <ul>
-      <li>Data strategy & governance</li>
-      <li>AI & data science advisory</li>
-      <li>Integrations</li>
-    </ul>
+  
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="about-image">
+      <img src="team-meeting.jpg" alt="dwp AB Team">
+    </div>
+    <div class="about-content">
+      <h2>About dwp AB</h2>
+      <p>Founded by world-class professionals from consulting, academia, and investment advisory, dwp was built to offer sharp, pragmatic advice without bureaucracy.</p>
+      <p>We act as a trusted partner — collaborative, curious, and outcome-driven. Our approach combines deep expertise with practical execution to deliver measurable results.</p>
+    </div>
   </section>
-
-  <section>
-    <h2>About dwp AB</h2>
-    <p>Founded by world-class professionals from consulting, academia, and investment advisory, dwp was built to offer sharp, pragmatic advice without bureaucracy. We act as a trusted partner — collaborative, curious, and outcome-driven.</p>
+  
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="section-title">
+      <h2>Get In Touch</h2>
+      <p>We're always open to meaningful conversations about how we can support your business</p>
+    </div>
+    
+    <div class="contact-form">
+      <form action="#" method="POST">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" class="form-control" required></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
   </section>
-
-  <section>
-    <h2>Contact</h2>
-    <p>We’re always open to meaningful conversations. Reach out to explore how we can support your business.</p>
-    <p><strong>Email:</strong> <a href="mailto:admin@dwpartners.se">Contact dwp</a></p>
-    <form action="#" method="POST">
-      <input type="text" name="name" placeholder="Your name" required />
-      <input type="email" name="email" placeholder="Your email" required />
-      <textarea name="message" rows="5" placeholder="Your message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-
+  
+  <!-- Footer -->
   <footer>
-    &copy; 2025 dwp AB. All rights reserved.
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="logga med CC.png" alt="dwp AB">
+        <p>Strategic Advice. Tangible Impact.</p>
+      </div>
+      
+      <div class="footer-links">
+        <div>
+          <h3>Services</h3>
+          <a href="#services">Transactions</a>
+          <a href="#services">Transformation</a>
+          <a href="#services">AI & Data</a>
+        </div>
+        
+        <div>
+          <h3>Company</h3>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 dwp AB. All rights reserved.
+    </div>
   </footer>
 </body>
 </html>
